@@ -17,5 +17,11 @@ public class HelloController {
     {
         return "hello world";
     }
+    @GetMapping("/list")
+    public List<String> list()
+    {
+        return List.of("1","2","3");
+    }
+
 
 }
