@@ -1,9 +1,8 @@
 package top.example.boot.week1.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @Author: wujiawang
@@ -12,16 +11,20 @@ import java.util.List;
  */
 @RestController
 public class HelloController {
+    //读取“开关状态”和“关闭提示语“
+    @Value("${my.feature.helloSwitch}")
+    private boolean helloSwitch;
+
+    @Value("${my.feature.closeMsg}")
+    private String closeMessage;
+
     @GetMapping("/hello")
-    public String hello()
-    {
-        return "hello world";
-    }
-    @GetMapping("/list")
-    public List<String> list()
-    {
-        return List.of("1","2","3");
-    }
+    public String hello() {
+        if (helloSwitch) {
+            return "接口开放中！欢迎访问我的第一个 spring boot 项目~";
 
-
+        } else {
+            return closeMessage;
+        }
+    }
 }
